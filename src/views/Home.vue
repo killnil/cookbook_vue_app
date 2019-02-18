@@ -1,9 +1,11 @@
 <template>
   <div class="home">
-    <h1>{{ message }}</h1>
-    <p>{{ message2 }}</p>
-    <div>
-      <input v-model="message2">
+    <h1>All Recipes</h1>
+    <div v-for="recipe in recipes">
+      <h2>{{ recipe.title }}</h2>
+      <p>Prep Time: {{ recipe.prep_time }}</p>
+      <p>Ingredients: {{ recipe.ingredients }}</p>
+      <p>Directions: {{ recipe.directions }}</p>
     </div>
   </div>
 </template>
@@ -12,14 +14,31 @@
 </style>
 
 <script>
+var axios = require('axios');
+
 export default {
   data: function() {
     return {
-      message: "Josh is sooooo coool and handsome!",
-      message2: "...or is he?"
+      recipes: []
     };
   },
-  created: function() {},
+  created: function() {
+    axios.get("http://localhost:3000/api/recipes")
+      .then(response => {
+        this.recipes = response.data;
+      });
+  },
   methods: {}
 };
 </script>
+
+
+
+
+
+
+
+
+
+
+
