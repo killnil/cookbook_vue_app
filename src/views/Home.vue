@@ -3,6 +3,7 @@
     <h1>All Recipes</h1>
     <div v-for="recipe in recipes">
       <h2>{{ recipe.title }}</h2>
+      <img v-bind:src="recipe.image_url" v-bind:alt="recipe.title">
       <p>Prep Time: {{ recipe.prep_time }}</p>
       <p>Ingredients: {{ recipe.ingredients }}</p>
       <p>Directions: {{ recipe.directions }}</p>
@@ -11,6 +12,9 @@
 </template>
 
 <style>
+img{
+  width: 250px;
+}
 </style>
 
 <script>
@@ -23,7 +27,7 @@ export default {
     };
   },
   created: function() {
-    axios.get("http://localhost:3000/api/recipes")
+    axios.get("/api/recipes")
       .then(response => {
         this.recipes = response.data;
       });
