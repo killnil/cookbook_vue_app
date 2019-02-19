@@ -27,9 +27,14 @@
     <div v-for="recipe in recipes">
       <h2>{{ recipe.title }}</h2>
       <img v-bind:src="recipe.image_url" v-bind:alt="recipe.title">
-      <p>Prep Time: {{ recipe.prep_time }}</p>
-      <p>Ingredients: {{ recipe.ingredients }}</p>
-      <p>Directions: {{ recipe.directions }}</p>
+      <div>
+        <button v-on:click="currentRecipe = recipe">More Info</button>
+      </div>
+      <div v-if="recipe === currentRecipe">
+        <p>Prep Time: {{ recipe.prep_time }}</p>
+        <p>Ingredients: {{ recipe.ingredients }}</p>
+        <p>Directions: {{ recipe.directions }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -52,7 +57,8 @@ export default {
       newRecipePrepTime: "",
       newRecipeIngredients: "",
       newRecipeDirections: "",
-      newRecipeImageUrl: ""
+      newRecipeImageUrl: "",
+      currentRecipe: {}
     };
   },
   created: function() {
