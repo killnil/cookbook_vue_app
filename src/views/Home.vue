@@ -56,7 +56,8 @@
             <div>
               Image URL: <input v-model="recipe.image_url">
             </div>
-            <button v-on:click="updateRecipe(recipe)">Update</button>
+            <button v-on:click="updateRecipe(recipe)" class="btn btn-success">Update</button>
+            <button v-on:click="destroyRecipe(recipe)" class="btn btn-primary">Delete</button>
           </div>
         </div>
       </div>
@@ -130,6 +131,14 @@ export default {
         .then(response => {
           console.log("success", response.data);
           inputRecipe = response.data;
+        });
+    },
+    destroyRecipe: function(inputRecipe) {
+      axios.delete("/api/recipes/" + inputRecipe.id)
+        .then(response => {
+          console.log("Success", response.data);
+          var index = this.recipes.indexOf(inputRecipe);
+          this.recipes.splice(index,1);
         });
     }
   }
