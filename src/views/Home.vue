@@ -33,30 +33,7 @@ export default {
       });
   },
   methods: {
-    updateRecipe: function(inputRecipe) {
-      var params = {
-                    title: inputRecipe.title,
-                    chef: inputRecipe.chef,
-                    prep_time: inputRecipe.prep_time,
-                    ingredients: inputRecipe.ingredients,
-                    directions: inputRecipe.directions,
-                    image_url: inputRecipe.image_url
-                    };
-
-      axios.patch("/api/recipes/" + inputRecipe.id, params)
-        .then(response => {
-          console.log("success", response.data);
-          inputRecipe = response.data;
-        });
-    },
-    destroyRecipe: function(inputRecipe) {
-      axios.delete("/api/recipes/" + inputRecipe.id)
-        .then(response => {
-          console.log("Success", response.data);
-          var index = this.recipes.indexOf(inputRecipe);
-          this.recipes.splice(index,1);
-        });
-    }
+    
   }
 };
 </script>

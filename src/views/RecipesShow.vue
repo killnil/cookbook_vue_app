@@ -1,5 +1,5 @@
 <template>
-  <div class="recipe-show">
+  <div class="recipes-show">
     <img :src=" recipe.image_url " :alt="recipe.title ">
     <h1>{{ recipe.title }}</h1>
     <h4>Chef: {{ recipe.chef }}</h4>
@@ -15,6 +15,9 @@
     <ol>
       <li v-for="direction in recipe.formatted.directions">{{ direction }}</li>
     </ol>
+
+    <router-link :to=" '/recipes/' + recipe.id + '/edit' ">Edit</router-link>
+    <button v-on:click="destroyRecipe()">Delete</button>
 
   </div>
 </template>
@@ -51,7 +54,15 @@ export default {
         this.recipe = response.data;
       });
   },
-  methods: {}
+  methods: {
+    destroyRecipe: function() {
+      axios.delete("/api/recipes/" + this.recipe.id)
+        .then(response => {
+          console.log("Success", response.data);
+          this.$router.push("/");
+        });
+    }
+  }
 }
 </script>
 
