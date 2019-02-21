@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="recipes-index">
     <h1>All Recipes</h1>
     <div v-for="recipe in recipes">
       <h2>{{ recipe.title }}</h2>
