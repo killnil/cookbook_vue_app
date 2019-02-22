@@ -4,7 +4,7 @@
     
     <div class="row">
       <div class="col-md-4" v-for="recipe in recipes">
-        <div class="card">
+        <div class="card my-card">
           <router-link v-bind:to="'/recipes/' + recipe.id">
             <img class="card-img-top" v-bind:src="recipe.image_url" v-bind:alt="recipe.title">
           </router-link>
